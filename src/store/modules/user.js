@@ -1,5 +1,5 @@
 import md5 from 'md5';
-import { login } from '../../api/login/sys';
+import { login } from '../../api/sys';
 import {
   getStorageItem,
   setStorageItem,

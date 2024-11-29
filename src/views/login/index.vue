@@ -53,23 +53,60 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue'
+  import { ref, computed } from 'vue';
+  import { validatePassword } from '../../utils/validate';
+  import { useStore } from 'vuex';
+  import router from '@/router';
 
+  // 登录参数、校验规则
   const loginForm = ref({
     username: '',
     password: ''
-  })
+  });
+  const loginRules = ref({
+    username: [
+      {
+        required: true,
+        message: '请输入用户名',
+        trigger: 'blur'
+      }
+    ],
+    password: [
+      { required: true, message: '请输入密码', trigger: 'blur' },
+      { trigger: 'blur', validator: validatePassword() }
+    ]
+  });
 
-  const loginRules = ref({})
   // 处理密码框文本显示状态
-  const passwordType = ref('password')
+  const passwordType = ref('password');
   const onChangePwdType = () => {
     if (passwordType.value === 'password') {
-      passwordType.value = 'text'
+      passwordType.value = 'text';
     } else {
-      passwordType.value = 'password'
+      passwordType.value = 'password';
     }
-  }
+  };
+
+  // 处理登录
+  const loading = ref(false);
+  const store = useStore();
+  const loginFromRef = ref(null);
+  const handleLogin = () => {
+    loginFromRef.value.validate((valid) => {
+      if (!valid) return;
+      loading.value = true;
+      store
+        .dispatch('user/login', loginForm.value) // 调用模块方法
+        .then((res) => {
+          loading.value = false;
+          router.push('/');
+        })
+        .catch((err) => {
+          console.log(err);
+          loading.value = false;
+        });
+    });
+  };
 </script>
 
 <style lang="scss" scoped>

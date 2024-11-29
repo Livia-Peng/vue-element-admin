@@ -1,7 +1,49 @@
 <template>
-  <div></div>
+  <div class="app-wrapper">
+    <!-- 左侧 -->
+    <Sidebar
+      class="sidebar-container"
+      :style="{ background: variables.menuBg }" />
+    <!-- 右侧 -->
+    <div class="main-container">
+      <!-- 顶部 -->
+      <div class="fixed-header">
+        <Navbar />
+      </div>
+      <!-- 中间内容 -->
+      <AppMain />
+    </div>
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+  import Navbar from './Navbar.vue';
+  import AppMain from './AppMain.vue';
+  import Sidebar from './Sidebar/index.vue';
+  import variables from '@/styles/variables.scss';
+</script>
 
-<style lang="scss"></style>
+<style lang="scss" scoped>
+  @import '~@/styles/mixin.scss';
+  @import '~@/styles/variables.scss';
+
+  .app-wrapper {
+    @include clearfix;
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .fixed-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 9;
+    width: calc(100% - #{$sideBarWidth});
+    transition: width #{$sideBarDuration};
+  }
+
+  .hideSidebar .fixed-header {
+    width: calc(100% - #{$hideSideBarWidth});
+  }
+</style>

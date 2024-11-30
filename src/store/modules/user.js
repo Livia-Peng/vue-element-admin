@@ -1,10 +1,12 @@
 import md5 from 'md5';
-import { login } from '../../api/sys';
+import { getUserInfo, login } from '../../api/sys';
 import {
   getStorageItem,
+  removeAllStorageItem,
   setStorageItem,
   StorageKeys
 } from '../../utils/storage';
+import router from '../../router';
 
 export default {
   namespaced: true,
@@ -14,8 +16,11 @@ export default {
   }),
   mutations: {
     setToken(state, token) {
-      state.token = state;
+      state.token = token;
       setStorageItem(StorageKeys.token, token);
+    },
+    setUserInfo(state, userInfo) {
+      state.userInfo = userInfo || {};
     }
   },
   actions: {
@@ -27,10 +32,24 @@ export default {
           .then((data) => {
             // console.log(data);
             this.commit('user/setToken', data.token);
+            setStorageItem(StorageKeys.timeStamp, Date.now());
             resolve(data);
           })
           .catch((err) => reject(err));
       });
+    },
+    // 获取用户信息
+    async getUserInfo() {
+      const res = await getUserInfo();
+      // console.log(res);
+      this.commit('user/setUserInfo', res);
+      return res;
+    },
+    logout() {
+      this.commit('user/setToken', '');
+      this.commit('user/setUserInfo', {});
+      removeAllStorageItem();
+      router.push('/login');
     }
   }
 };

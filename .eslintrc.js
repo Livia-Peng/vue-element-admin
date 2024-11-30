@@ -13,6 +13,7 @@ module.exports = {
     'space-before-function-paren': 'off',
     'no-unused-vars': 'off',
     'handle-callback-err': 'off',
+    'no-prototype-builtins': 'off',
     semi: 'off',
     indent: 'off'
   }

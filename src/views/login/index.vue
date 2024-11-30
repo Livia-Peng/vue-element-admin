@@ -30,7 +30,8 @@
           placeholder="password"
           name="password"
           :type="passwordType"
-          v-model="loginForm.password" />
+          v-model="loginForm.password"
+          @keyup.enter="handleLogin" />
         <span class="show-pwd">
           <svg-icon
             :icon="passwordType === 'password' ? 'eye' : 'eye-open'"

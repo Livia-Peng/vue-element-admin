@@ -1,6 +1,7 @@
 import axios from 'axios';
 import md5 from 'md5';
 import { ElMessage } from 'element-plus';
+import store from '../store';
 
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API,
@@ -22,6 +23,10 @@ service.interceptors.request.use(
     const { icode, time } = getTestICode();
     config.headers.icode = icode;
     config.headers.codeType = time;
+    // console.log('token', store.getters.token);
+    if (store.getters.token) {
+      config.headers.Authorization = 'Bearer ' + store.getters.token;
+    }
     return config;
   },
   (error) => {
@@ -42,7 +47,17 @@ service.interceptors.response.use(
       return Promise.reject(new Error(message));
     }
   },
-  (error) => {}
+  (error) => {
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      store.dispatch('user/logout');
+    }
+    ElMessage.error(error.message); // 提示错误消息
+    return Promise.reject(error);
+  }
 );
 
 export default service;

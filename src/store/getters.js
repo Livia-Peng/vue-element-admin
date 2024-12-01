@@ -8,6 +8,7 @@ const getters = {
     return state.user.userInfo && state.user.userInfo.hasOwnProperty('id');
   },
   sidebarOpened: (state) => state.app.sidebarOpened,
+  language: (state) => state.app.language,
   cssVar: (state) => variables
 };
 

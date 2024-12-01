@@ -1,7 +1,8 @@
 // 记录存储的key，以便管理
 export const StorageKeys = {
   token: 'token',
-  timeStamp: 'timeStamp'
+  timeStamp: 'timeStamp',
+  language: 'language'
 };
 
 /**

@@ -1,8 +1,9 @@
 <template>
   <div class="navbar">
-    <hamburger class="hamburger-container"></hamburger>
-    <breadcrumb class="breadcrumb-container"></breadcrumb>
+    <Hamburger class="hamburger-container"></Hamburger>
+    <Breadcrumb class="breadcrumb-container"></Breadcrumb>
     <div class="right-menu">
+      <LangSelect class="right-menu-item hover-effect"></LangSelect>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
@@ -15,14 +16,14 @@
         <template #dropdown>
           <el-dropdown-menu class="user-dropdown">
             <router-link to="/">
-              <el-dropdown-item> 主页</el-dropdown-item>
+              <el-dropdown-item> {{ $t('msg.navBar.home') }}</el-dropdown-item>
             </router-link>
             <a target="_blank" href="https://coding.imooc.com/class/542.html">
-              <el-dropdown-item>课程主页</el-dropdown-item>
+              <el-dropdown-item>{{ $t('msg.navBar.course') }}</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="logout"
-              >退出登录</el-dropdown-item
-            >
+            <el-dropdown-item divided @click="logout">
+              {{ $t('msg.navBar.logout') }}
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -34,6 +35,7 @@
   import { useStore } from 'vuex';
   import Hamburger from '@/components/Hamburger/index';
   import Breadcrumb from '@/components/Breadcrumb/index';
+  import LangSelect from '@/components/LangSelect/index';
 
   const store = useStore();
   const logout = () => {
@@ -72,7 +74,7 @@
       float: right;
       padding-right: 16px;
 
-      ::v-deep .right-menu-item {
+      .right-menu-item {
         display: inline-block;
         padding: 0 18px 0 0;
         font-size: 24px;
@@ -89,7 +91,7 @@
         }
       }
 
-      ::v-deep .avatar-container {
+      .avatar-container {
         cursor: pointer;
         .avatar-wrapper {
           margin-top: 5px;

@@ -6,9 +6,8 @@
       :model="loginForm"
       :rules="loginRules">
       <div class="title-container">
-        <!-- <h3 class="title">{{ $t('msg.login.title') }}</h3> -->
-        <h3 class="title">用户登录</h3>
-        <!-- <lang-select class="lang-select" effect="light"></lang-select> -->
+        <h3 class="title">{{ $t('msg.login.title') }}</h3>
+        <LangSelect class="lang-select" effect="light"></LangSelect>
       </div>
 
       <el-form-item prop="username">
@@ -43,39 +42,46 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
-        @click="handleLogin"
-        >登录
+        @click="handleLogin">
+        {{ $t('msg.login.loginBtn') }}
       </el-button>
-      <!-- {{ $t('msg.login.loginBtn') }} -->
 
-      <!-- <div class="tips" v-html="$t('msg.login.desc')"></div> -->
+      <div class="tips" v-html="$t('msg.login.desc')"></div>
     </el-form>
   </div>
 </template>
 
 <script setup>
   import { ref, computed } from 'vue';
-  import { validatePassword } from '../../utils/validate';
+  import { validatePassword, watchSwitchLang } from '@/utils/tools';
   import { useStore } from 'vuex';
+  import { useI18n } from 'vue-i18n';
   import router from '@/router';
+  import LangSelect from '@/components/LangSelect/index';
 
   // 登录参数、校验规则
   const loginForm = ref({
     username: '',
     password: ''
   });
+  const loginFromRef = ref(null);
+  const i18n = useI18n();
   const loginRules = ref({
     username: [
       {
         required: true,
-        message: '请输入用户名',
+        message: computed(() => {
+          return i18n.t('msg.login.usernameRule');
+        }),
         trigger: 'blur'
       }
     ],
     password: [
-      { required: true, message: '请输入密码', trigger: 'blur' },
-      { trigger: 'blur', validator: validatePassword() }
+      { required: true, trigger: 'blur', validator: validatePassword() }
     ]
+  });
+  watchSwitchLang(() => {
+    loginFromRef.value.validate();
   });
 
   // 处理密码框文本显示状态
@@ -91,7 +97,6 @@
   // 处理登录
   const loading = ref(false);
   const store = useStore();
-  const loginFromRef = ref(null);
   const handleLogin = () => {
     loginFromRef.value.validate((valid) => {
       if (!valid) return;
@@ -186,7 +191,7 @@
         font-weight: bold;
       }
 
-      :v-deep .lang-select {
+      .lang-select {
         position: absolute;
         top: 4px;
         right: 0;

@@ -44,8 +44,8 @@
         style="width: 100%; margin-bottom: 30px"
         :loading="loading"
         @click="handleLogin"
-        >登录</el-button
-      >
+        >登录
+      </el-button>
       <!-- {{ $t('msg.login.loginBtn') }} -->
 
       <!-- <div class="tips" v-html="$t('msg.login.desc')"></div> -->

@@ -3,6 +3,8 @@
     <Hamburger class="hamburger-container"></Hamburger>
     <Breadcrumb class="breadcrumb-container"></Breadcrumb>
     <div class="right-menu">
+      <!-- 全屏模式 -->
+      <Screenfull class="right-menu-item hover-effect"></Screenfull>
       <!-- 主题选择 -->
       <ThemePicker class="right-menu-item hover-effect"></ThemePicker>
       <!-- 语言选择 -->
@@ -40,6 +42,7 @@
   import Breadcrumb from '@/components/Breadcrumb/index';
   import LangSelect from '@/components/LangSelect/index';
   import ThemePicker from '@/components/ThemePicker/index';
+  import Screenfull from '@/components/Screenfull/index';
 
   const store = useStore();
   const logout = () => {

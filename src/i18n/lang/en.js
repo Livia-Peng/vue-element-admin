@@ -46,6 +46,7 @@ export default {
     themeChange: 'Theme Change'
   },
   universal: {
+    title: 'Remoind',
     confirm: 'confirm',
     cancel: 'cancel'
   },

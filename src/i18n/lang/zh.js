@@ -46,6 +46,7 @@ export default {
     themeChange: '主题更换'
   },
   universal: {
+    title: '提示',
     confirm: '确定',
     cancel: '取消'
   },
@@ -203,4 +204,4 @@ export default {
     sheetActual: '今日实收',
     sheetBalance: '今日结余'
   }
-}
+};

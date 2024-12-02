@@ -1,4 +1,5 @@
-import variables from '@/styles/variables.scss';
+import { generateColors } from '@/utils/theme';
+import { getStorageItem, StorageKeys } from '@/utils/storage';
 
 // 快捷访问
 const getters = {
@@ -9,7 +10,11 @@ const getters = {
   },
   sidebarOpened: (state) => state.app.sidebarOpened,
   language: (state) => state.app.language,
-  cssVar: (state) => variables
+  mainColor: (state) => state.theme.mainColor,
+  cssVar: (state) => ({
+    ...state.theme.variables,
+    ...generateColors(getStorageItem(StorageKeys.mainColor))
+  })
 };
 
 export default getters;

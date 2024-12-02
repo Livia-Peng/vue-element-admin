@@ -3,6 +3,9 @@
     <Hamburger class="hamburger-container"></Hamburger>
     <Breadcrumb class="breadcrumb-container"></Breadcrumb>
     <div class="right-menu">
+      <!-- 主题选择 -->
+      <ThemePicker class="right-menu-item hover-effect"></ThemePicker>
+      <!-- 语言选择 -->
       <LangSelect class="right-menu-item hover-effect"></LangSelect>
       <!-- 头像 -->
       <el-dropdown class="avatar-container" trigger="click">
@@ -36,6 +39,7 @@
   import Hamburger from '@/components/Hamburger/index';
   import Breadcrumb from '@/components/Breadcrumb/index';
   import LangSelect from '@/components/LangSelect/index';
+  import ThemePicker from '@/components/ThemePicker/index';
 
   const store = useStore();
   const logout = () => {
@@ -74,7 +78,7 @@
       float: right;
       padding-right: 16px;
 
-      .right-menu-item {
+      ::v-deep .right-menu-item {
         display: inline-block;
         padding: 0 18px 0 0;
         font-size: 24px;
@@ -91,7 +95,7 @@
         }
       }
 
-      .avatar-container {
+      ::v-deep .avatar-container {
         cursor: pointer;
         .avatar-wrapper {
           margin-top: 5px;

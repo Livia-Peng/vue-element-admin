@@ -1,6 +1,6 @@
 import { watch } from 'vue';
 import store from '@/store';
-import { commonString } from '../constant';
+import { commonConfig } from '../constant';
 import { getStorageItem, StorageKeys } from './storage';
 import i18n from '@/i18n';
 
@@ -36,7 +36,7 @@ export function checkLoginTimeout() {
   const currentTime = Date.now();
   // 缓存时间戳
   const timeStamp = getStorageItem(StorageKeys.timeStamp);
-  return currentTime - timeStamp > commonString.TOKEN_TIMEOUT_VALUE;
+  return currentTime - timeStamp > commonConfig.TOKEN_TIMEOUT_VALUE;
 }
 
 export function generateTitle(title) {

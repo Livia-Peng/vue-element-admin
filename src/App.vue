@@ -5,16 +5,16 @@
 </template>
 
 <script setup>
-  import zhCn from 'element-plus/lib/locale/lang/zh-cn';
-  import en from 'element-plus/lib/locale/lang/en';
-  import { useStore } from 'vuex';
-  import { generateNewStyle, writeNewStyle } from '@/utils/theme';
-  import { watchSwitchLang } from '@/utils/i18n'
+  import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+  import en from 'element-plus/lib/locale/lang/en'
+  import { useStore } from 'vuex'
+  import { generateNewStyle, writeNewStyle } from '@/utils/theme'
+  import { watchSwitchLang } from '@/utils/tools'
 
-  const store = useStore();
+  const store = useStore()
   generateNewStyle(store.getters.mainColor).then((newStyleText) => {
-    writeNewStyle(newStyleText);
-  });
+    writeNewStyle(newStyleText)
+  })
 
   // 监听 语言变化，重新获取个人信息
   watchSwitchLang(() => {

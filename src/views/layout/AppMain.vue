@@ -1,25 +1,25 @@
 <template>
   <div class="app-main">
-    <router-view v-slot="{ Component, route }">
+    <router-view />
+    <!-- <router-view v-slot="{ Component, route }">
       <transition name="fade-transform" mode="out-in">
         <keep-alive>
-          <component :is="Component" :key="route.path"/>
+          <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
-    </router-view>
+    </router-view> -->
   </div>
 </template>
 
 <script setup>
   import { watch } from 'vue'
-  import { validTags } from '@/utils/tools'
-  import { generateTitle, watchSwitchLang } from '@/utils/i18n'
+  import { generateTitle, watchSwitchLang, validTags } from '@/utils/tools'
   import { useRoute } from 'vue-router'
   import { useStore } from 'vuex'
 
   const route = useRoute()
 
-  const getTitle = route => {
+  const getTitle = (route) => {
     let title = ''
     if (!route.meta) {
       // 处理无 meta 的路由
@@ -31,22 +31,26 @@
     return title
   }
 
-  const store = useStore();
-  watch(route, (to, from) => {
-    if (!validTags(to.path)) return
-    const { fullPath, meta, name, params, path, query } = to
-    store.commit('app/addTagsViewList', {
-      fullPath,
-      meta,
-      name,
-      params,
-      path,
-      query,
-      title: getTitle(to)
-    })
-  }, {
-    immediate: true
-  })
+  const store = useStore()
+  watch(
+    route,
+    (to, from) => {
+      if (!validTags(to.path)) return
+      const { fullPath, meta, name, params, path, query } = to
+      store.commit('app/addTagsViewList', {
+        fullPath,
+        meta,
+        name,
+        params,
+        path,
+        query,
+        title: getTitle(to)
+      })
+    },
+    {
+      immediate: true
+    }
+  )
 
   watchSwitchLang(() => {
     store.getters.tagsViewList.forEach((route, index) => {

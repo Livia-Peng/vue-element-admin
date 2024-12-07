@@ -1,7 +1,7 @@
-import { createI18n } from 'vue-i18n';
-import mZhLocale from './lang/zh';
-import mEnLocale from './lang/en';
-import store from '@/store';
+import { createI18n } from 'vue-i18n'
+import mZhLocale from './lang/zh'
+import mEnLocale from './lang/en'
+import store from '@/store'
 
 const messages = {
   en: {
@@ -14,11 +14,11 @@ const messages = {
       ...mZhLocale
     }
   }
-};
+}
 
 // 动态获取当前语言
 function getLanguage() {
-  return store && store.getters && store.getters.language;
+  return (store && store.getters && store.getters.language) || 'zh'
 }
 
 const i18n = createI18n({
@@ -28,6 +28,6 @@ const i18n = createI18n({
   globalInjection: true,
   locale: getLanguage(),
   messages
-});
+})
 
-export default i18n;
+export default i18n

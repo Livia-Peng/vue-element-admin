@@ -18,44 +18,42 @@
 </template>
 
 <script setup>
-  // import { generateTitle } from '@/utils/i18n';
-  import { ref, watch } from 'vue';
-  import { useRoute, useRouter } from 'vue-router';
-  import { useStore } from 'vuex';
-  import { generateTitle } from '@/utils/tools';
+  import { ref, watch } from 'vue'
+  import { useRoute, useRouter } from 'vue-router'
+  import { useStore } from 'vuex'
+  import { generateTitle } from '@/utils/tools'
 
-  const route = useRoute();
+  const route = useRoute()
   // 定义路由数据
-  const breadcrumbData = ref([]);
+  const breadcrumbData = ref([])
   const getBreadcrumbData = () => {
     // route.matched 获得当前路由记录
-    console.log(route.matched);
     breadcrumbData.value = route.matched.filter(
       (item) => item.meta || item.meta.title
-    );
-  };
+    )
+  }
   // 监听路由变化时触发
   watch(
     route,
     () => {
-      getBreadcrumbData();
+      getBreadcrumbData()
     },
     {
       // 创建侦听器时，立即执行一遍回调
       immediate: true
     }
-  );
+  )
 
   // 处理点击事件
-  const router = useRouter();
+  const router = useRouter()
   const onLinkClick = (item) => {
-    router.push(item.path);
-  };
+    router.push(item.path)
+  }
 
   // 进行主题替换，获取动态样式
-  const store = useStore();
+  const store = useStore()
   // eslint-disable-next-line
-  const linkHoverColor = ref(store.getters.cssVar.menuBg);
+  const linkHoverColor = ref(store.getters.cssVar.menuBg)
 </script>
 
 <style lang="scss" scoped>

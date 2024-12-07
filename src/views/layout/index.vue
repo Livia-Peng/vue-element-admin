@@ -21,10 +21,10 @@
 </template>
 
 <script setup>
-  import Navbar from './Navbar.vue';
-  import AppMain from './AppMain.vue';
-  import Sidebar from './Sidebar/index.vue';
-  import TagsView from '@/components/TagsView/index';
+  import Navbar from './Navbar.vue'
+  import AppMain from './AppMain.vue'
+  import Sidebar from './Sidebar/index.vue'
+  import TagsView from '@/components/TagsView/index'
 </script>
 
 <style lang="scss" scoped>

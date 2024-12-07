@@ -2,7 +2,7 @@
   <div class="author-container">
     <div class="header">
       <PanThumb
-        image="https://img4.sycdn.imooc.com/61110c2b0001152907400741-140-140.jpg"
+        :image="$store.getters.userInfo.avatar"
         height="60px"
         width="60px"
         :hoverable="false">

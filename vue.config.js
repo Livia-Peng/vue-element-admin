@@ -1,10 +1,11 @@
-const path = require('path');
+const path = require('path')
 
 function resolve(dir) {
-  return path.join(__dirname, dir);
+  return path.join(__dirname, dir)
 }
 
 module.exports = {
+  productionSourceMap: true,
   devServer: {
     // 配置反向代理
     proxy: {
@@ -18,7 +19,7 @@ module.exports = {
     }
   },
   chainWebpack(config) {
-    config.module.rule('svg').exclude.add(resolve('src/icons')).end();
+    config.module.rule('svg').exclude.add(resolve('src/icons')).end()
     config.module
       .rule('icons')
       .test(/\.svg$/)
@@ -29,6 +30,6 @@ module.exports = {
       .options({
         symbolId: 'icon-[name]'
       })
-      .end();
+      .end()
   }
-};
+}

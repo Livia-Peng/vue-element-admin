@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-tooltip :content="$t('msg.navBar.guide')">
-      <svg-icon id="guide-start" icon="guide" @click="onClick"/>
+      <svg-icon id="guide-start" icon="guide" @click="onClick" />
     </el-tooltip>
   </div>
 </template>
@@ -12,7 +12,7 @@
   import { onMounted } from 'vue'
   import { useI18n } from 'vue-i18n'
   import steps from './steps'
-  import { watchSwitchLang } from '@/utils/i18n'
+  import { watchSwitchLang } from '@/utils/tools'
 
   const i18n = useI18n()
 

@@ -2,7 +2,7 @@
   <div class="my-container">
     <el-row>
       <el-col :span="6">
-        <project-card class="user-card" :features="featureData"></project-card>
+        <ProjectCard class="user-card" :features="featureData"></ProjectCard>
       </el-col>
       <el-col :span="18">
         <el-card>
@@ -30,7 +30,7 @@
   import Author from './partial/Author.vue'
   import { ref } from 'vue'
   import { feature } from '@/api/user'
-  import { watchSwitchLang } from '@/utils/i18n'
+  import { watchSwitchLang } from '@/utils/tools'
 
   const activeName = ref('feature')
 

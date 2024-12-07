@@ -10,6 +10,7 @@ const getters = {
   },
   sidebarOpened: (state) => state.app.sidebarOpened,
   language: (state) => state.app.language,
+  tagsViewList: (state) => state.app.tagsViewList,
   mainColor: (state) => state.theme.mainColor,
   cssVar: (state) => ({
     ...state.theme.variables,

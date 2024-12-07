@@ -42,3 +42,8 @@ export function checkLoginTimeout() {
 export function generateTitle(title) {
   return title ? i18n.global.t('msg.route.' + title) : '';
 }
+
+// 验证 path 是否需要被缓存
+export function validTags(path) {
+  return !commonConfig.pathBlacklist.includes(path)
+}

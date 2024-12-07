@@ -3,7 +3,8 @@ export const StorageKeys = {
   token: 'token',
   timeStamp: 'timeStamp',
   language: 'language',
-  mainColor: 'mainColor'
+  mainColor: 'mainColor',
+  tagsView: 'tagsView'
 };
 
 /**

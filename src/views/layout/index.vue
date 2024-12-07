@@ -4,6 +4,7 @@
     :class="[$store.getters.sidebarOpened ? 'open-sidebar' : 'hide-sidebar']">
     <!-- 左侧 -->
     <Sidebar
+      id="guide-sidebar"
       class="sidebar-container"
       :style="{ background: $store.getters.cssVar.menuBg }" />
     <!-- 右侧 -->
@@ -11,6 +12,7 @@
       <!-- 顶部 -->
       <div class="fixed-header">
         <Navbar />
+        <TagsView id="guide-tags" />
       </div>
       <!-- 中间内容 -->
       <AppMain />
@@ -22,6 +24,7 @@
   import Navbar from './Navbar.vue';
   import AppMain from './AppMain.vue';
   import Sidebar from './Sidebar/index.vue';
+  import TagsView from '@/components/TagsView/index';
 </script>
 
 <style lang="scss" scoped>

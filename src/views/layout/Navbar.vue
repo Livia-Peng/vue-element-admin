@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
     <Hamburger class="hamburger-container"></Hamburger>
-    <Breadcrumb class="breadcrumb-container"></Breadcrumb>
+    <Breadcrumb id="guide-breadcrumb" class="breadcrumb-container"></Breadcrumb>
     <div class="right-menu">
+      <!-- 功能引导 -->
+      <Guide class="right-menu-item hover-effect"></Guide>
       <!-- 全局搜索 -->
       <HeaderSearch class="right-menu-item hover-effect"></HeaderSearch>
       <!-- 全屏模式 -->
@@ -46,6 +48,7 @@
   import ThemePicker from '@/components/ThemePicker/index';
   import Screenfull from '@/components/Screenfull/index';
   import HeaderSearch from '@/components/HeaderSearch/index';
+  import Guide from '@/components/Guide/index';
 
   const store = useStore();
   const logout = () => {

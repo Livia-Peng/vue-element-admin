@@ -8,6 +8,7 @@ import installElementPlus from './plugins/element'
 import './styles/index.scss' // 全局样式
 import installIcons from './icons'
 import installFilters from './filter'
+import installDirective from './directives'
 import './permission'
 
 // 定义特性标志
@@ -19,6 +20,7 @@ const app = createApp(App)
 installElementPlus(app)
 installIcons(app)
 installFilters(app)
+installDirective(app)
 app.use(i18n)
 app.use(store)
 app.use(router)

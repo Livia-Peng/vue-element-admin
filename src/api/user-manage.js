@@ -9,7 +9,7 @@ export const getUserManageList = (data) => {
 }
 
 // 获取用户详情
-export const userDetail = (id) => {
+export const getUserDetail = (id) => {
   return request({
     url: `/user-manage/detail/${id}`
   })

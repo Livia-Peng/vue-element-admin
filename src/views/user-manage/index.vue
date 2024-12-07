@@ -65,7 +65,7 @@
         @size-change="handleSizeChange"
         @current-change="handlePageChange"
         :current-page="pageInfo.page"
-        :page-sizes="[2, 5, 10, 20]"
+        :page-sizes="[5, 10, 20, 50]"
         :page-size="pageInfo.size"
         layout="total, sizes, prev, pager, next, jumper"
         :total="pageInfo.total">
@@ -85,6 +85,7 @@
   import { watchSwitchLang } from '@/utils/tools'
   import { useI18n } from 'vue-i18n'
   import { ElMessageBox, ElMessage } from 'element-plus'
+  import { useRouter } from 'vue-router'
   import ExportExcel from './ExportExcel.vue'
   import ImportExcel from './ImportExcel.vue'
 
@@ -93,7 +94,7 @@
   const pageInfo = ref({
     total: 0,
     page: 1,
-    size: 1
+    size: 5
   })
   // 获取数据的方法
   const getListData = async () => {
@@ -118,9 +119,11 @@
     getListData()
   }
   // 查看详情/查看角色/删除/导入/导出
+  const router = useRouter()
   const i18n = useI18n()
   const onShowDetailClick = (id) => {
     console.log(id)
+    router.push(`/user/info/${id}`)
   }
   const onShowRoleClick = (row) => {
     console.log(row)

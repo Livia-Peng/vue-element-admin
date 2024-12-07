@@ -7,6 +7,7 @@ import installElementPlus from './plugins/element'
 // import * as icons from '@element-plus/icons'  // element icon 全局导入
 import './styles/index.scss' // 全局样式
 import installIcons from './icons'
+import installFilters from './filter'
 import './permission'
 
 // 定义特性标志
@@ -17,6 +18,7 @@ const app = createApp(App)
 // Object.keys(icons).forEach((k) => app.component(k, icons[k]))
 installElementPlus(app)
 installIcons(app)
+installFilters(app)
 app.use(i18n)
 app.use(store)
 app.use(router)

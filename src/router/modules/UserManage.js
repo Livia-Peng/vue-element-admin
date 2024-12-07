@@ -1,4 +1,4 @@
-import layout from '@/views/layout';
+import layout from '@/views/layout'
 
 export default {
   path: '/user',
@@ -20,25 +20,6 @@ export default {
         title: 'userManage',
         icon: 'personnel-manage'
       }
-    },
-    {
-      path: '/user/info/:id',
-      name: 'userInfo',
-      component: () =>
-        import(/* webpackChunkName: "user-manage" */ '@/views/user-info/index'),
-      props: true,
-      meta: {
-        title: 'userInfo'
-      }
-    },
-    {
-      path: '/user/import',
-      name: 'import',
-      component: () =>
-        import(/* webpackChunkName: "user-manage" */ '@/views/import/index'),
-      meta: {
-        title: 'excelImport'
-      }
     }
   ]
-};
+}

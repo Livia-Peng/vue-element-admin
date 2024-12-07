@@ -1,12 +1,12 @@
-import md5 from 'md5';
-import { getUserInfo, login } from '../../api/sys';
+import md5 from 'md5'
+import { getUserInfo, login } from '../../api/sys'
 import {
   getStorageItem,
   removeAllStorageItem,
   setStorageItem,
   StorageKeys
-} from '../../utils/storage';
-import router from '../../router';
+} from '../../utils/storage'
+import router, { resetRouter } from '../../router'
 
 export default {
   namespaced: true,
@@ -16,40 +16,41 @@ export default {
   }),
   mutations: {
     setToken(state, token) {
-      state.token = token;
-      setStorageItem(StorageKeys.token, token);
+      state.token = token
+      setStorageItem(StorageKeys.token, token)
     },
     setUserInfo(state, userInfo) {
-      state.userInfo = userInfo || {};
+      state.userInfo = userInfo || {}
     }
   },
   actions: {
     // 登录请求
     login(context, userInfo) {
-      const { username, password } = userInfo;
+      const { username, password } = userInfo
       return new Promise((resolve, reject) => {
         login({ username, password: md5(password) })
           .then((data) => {
             // console.log(data);
-            this.commit('user/setToken', data.token);
-            setStorageItem(StorageKeys.timeStamp, Date.now());
-            resolve(data);
+            this.commit('user/setToken', data.token)
+            setStorageItem(StorageKeys.timeStamp, Date.now())
+            resolve(data)
           })
-          .catch((err) => reject(err));
-      });
+          .catch((err) => reject(err))
+      })
     },
     // 获取用户信息
     async getUserInfo() {
-      const res = await getUserInfo();
+      const res = await getUserInfo()
       // console.log(res);
-      this.commit('user/setUserInfo', res);
-      return res;
+      this.commit('user/setUserInfo', res)
+      return res
     },
     logout() {
-      this.commit('user/setToken', '');
-      this.commit('user/setUserInfo', {});
-      removeAllStorageItem();
-      router.push('/login');
+      resetRouter()
+      this.commit('user/setToken', '')
+      this.commit('user/setUserInfo', {})
+      removeAllStorageItem()
+      router.push('/login')
     }
   }
-};
+}

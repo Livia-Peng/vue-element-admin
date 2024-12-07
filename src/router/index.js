@@ -1,10 +1,11 @@
-import { createRouter, createWebHashHistory } from 'vue-router';
-import UserManageRouter from './modules/UserManage';
-import RoleListRouter from './modules/RoleList';
-import PermissionListRouter from './modules/PermissionList';
-import ArticleRouter from './modules/Article';
-import ArticleCreateRouter from './modules/ArticleCreate';
-import layout from '@/views/layout';
+import { createRouter, createWebHashHistory } from 'vue-router'
+import UserManageRouter from './modules/UserManage'
+import RoleListRouter from './modules/RoleList'
+import PermissionListRouter from './modules/PermissionList'
+import ArticleRouter from './modules/Article'
+import ArticleCreateRouter from './modules/ArticleCreate'
+import layout from '@/views/layout'
+import store from '@/store'
 
 // 私有路由表
 export const privateRoutes = [
@@ -13,7 +14,7 @@ export const privateRoutes = [
   PermissionListRouter,
   ArticleRouter,
   ArticleCreateRouter
-];
+]
 
 // 公开路由表（无需判断权限）
 export const publicRoutes = [
@@ -51,11 +52,25 @@ export const publicRoutes = [
       }
     ]
   }
-];
+]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...privateRoutes, ...publicRoutes]
-});
+  routes: publicRoutes
+})
 
-export default router;
+// 重置路由
+export function resetRouter() {
+  if (
+    store.getters.userInfo &&
+    store.getters.userInfo.permission &&
+    store.getters.userInfo.permission.menus
+  ) {
+    const menus = store.getters.userInfo.permission.menus
+    menus.forEach((menu) => {
+      router.removeRoute(menu)
+    })
+  }
+}
+
+export default router

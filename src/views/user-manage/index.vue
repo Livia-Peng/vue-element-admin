@@ -2,7 +2,10 @@
   <div class="user-manage-container">
     <el-card class="header">
       <div>
-        <el-button type="primary" @click="onImportExcelClick">
+        <el-button
+          type="primary"
+          @click="onImportExcelClick"
+          v-permission="['importExcel']">
           {{ $t('msg.excel.importExcel') }}
         </el-button>
         <el-button type="success" @click="onExportExcelClick">
@@ -50,10 +53,18 @@
               @click="onShowDetailClick(row._id)">
               {{ $t('msg.excel.show') }}
             </el-button>
-            <el-button type="info" size="small" @click="onShowRoleClick(row)">
+            <el-button
+              type="info"
+              size="small"
+              v-permission="['distributeRole']"
+              @click="onShowRoleClick(row)">
               {{ $t('msg.excel.showRole') }}
             </el-button>
-            <el-button type="danger" size="small" @click="onRemoveClick(row)">
+            <el-button
+              type="danger"
+              size="small"
+              v-permission="['removeUser']"
+              @click="onRemoveClick(row)">
               {{ $t('msg.excel.remove') }}
             </el-button>
           </template>
@@ -72,6 +83,10 @@
       </el-pagination>
     </el-card>
 
+    <UpdateRoles
+      v-model="roleDialogVisible"
+      :userId="roleUserId"
+      @updateRole="getListData"></UpdateRoles>
     <ImportExcel
       v-model="importExcelVisible"
       @getList="getListData"></ImportExcel>
@@ -88,6 +103,7 @@
   import { useRouter } from 'vue-router'
   import ExportExcel from './ExportExcel.vue'
   import ImportExcel from './ImportExcel.vue'
+  import UpdateRoles from './UpdateRoles.vue'
 
   // 表格数据定义
   const tableData = ref([])
@@ -125,9 +141,16 @@
     console.log(id)
     router.push(`/user/info/${id}`)
   }
+  const roleDialogVisible = ref(false)
+  const roleUserId = ref('')
+  watch(roleDialogVisible, (val) => {
+    if (!val) roleUserId.value = ''
+  })
   const onShowRoleClick = (row) => {
-    console.log(row)
+    roleUserId.value = row._id
+    roleDialogVisible.value = true
   }
+
   const onRemoveClick = (row) => {
     // console.log(row)
     ElMessageBox.confirm(
@@ -144,10 +167,12 @@
       getListData()
     })
   }
+
   const importExcelVisible = ref(false)
   const onImportExcelClick = () => {
     importExcelVisible.value = true
   }
+
   const exportExcelVisible = ref(false)
   const onExportExcelClick = () => {
     exportExcelVisible.value = true

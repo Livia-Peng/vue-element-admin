@@ -1,4 +1,4 @@
-import layout from '@/views/layout';
+import layout from '@/views/layout'
 
 export default {
   path: '/article',
@@ -11,7 +11,7 @@ export default {
       path: '/article/create',
       component: () =>
         import(
-          /* webpackChunkName: "article-create" */ '@/views/article-create/index'
+          /* webpackChunkName: "article-upsert" */ '@/views/article-upsert/index'
         ),
       meta: {
         title: 'articleCreate',
@@ -22,11 +22,11 @@ export default {
       path: '/article/editor/:id',
       component: () =>
         import(
-          /* webpackChunkName: "article-create" */ '@/views/article-create/index'
+          /* webpackChunkName: "article-upsert" */ '@/views/article-upsert/index'
         ),
       meta: {
         title: 'articleEditor'
       }
     }
   ]
-};
+}

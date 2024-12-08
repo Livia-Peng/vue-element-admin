@@ -1,4 +1,4 @@
-import layout from '@/views/layout';
+import layout from '@/views/layout'
 
 export default {
   path: '/article',
@@ -19,7 +19,7 @@ export default {
       }
     },
     {
-      path: '/article/:id',
+      path: '/article/detail/:id',
       component: () =>
         import(
           /* webpackChunkName: "article-ranking" */ '@/views/article-detail/index'
@@ -29,4 +29,4 @@ export default {
       }
     }
   ]
-};
+}

@@ -52,26 +52,26 @@
 </template>
 
 <script setup>
-  import { ref, computed } from 'vue';
-  import { validatePassword, watchSwitchLang } from '@/utils/tools';
-  import { useStore } from 'vuex';
-  import { useI18n } from 'vue-i18n';
-  import router from '@/router';
-  import LangSelect from '@/components/LangSelect/index';
+  import { ref, computed } from 'vue'
+  import { validatePassword, watchSwitchLang } from '@/utils/tools'
+  import { useStore } from 'vuex'
+  import { useI18n } from 'vue-i18n'
+  import router from '@/router'
+  import LangSelect from '@/components/LangSelect/index'
 
   // 登录参数、校验规则
   const loginForm = ref({
     username: '',
     password: ''
-  });
-  const loginFromRef = ref(null);
-  const i18n = useI18n();
+  })
+  const loginFromRef = ref(null)
+  const i18n = useI18n()
   const loginRules = ref({
     username: [
       {
         required: true,
         message: computed(() => {
-          return i18n.t('msg.login.usernameRule');
+          return i18n.t('msg.login.usernameRule')
         }),
         trigger: 'blur'
       }
@@ -79,40 +79,40 @@
     password: [
       { required: true, trigger: 'blur', validator: validatePassword() }
     ]
-  });
+  })
   watchSwitchLang(() => {
-    loginFromRef.value.validate();
-  });
+    loginFromRef.value.validate()
+  })
 
   // 处理密码框文本显示状态
-  const passwordType = ref('password');
+  const passwordType = ref('password')
   const onChangePwdType = () => {
     if (passwordType.value === 'password') {
-      passwordType.value = 'text';
+      passwordType.value = 'text'
     } else {
-      passwordType.value = 'password';
+      passwordType.value = 'password'
     }
-  };
+  }
 
   // 处理登录
-  const loading = ref(false);
-  const store = useStore();
+  const loading = ref(false)
+  const store = useStore()
   const handleLogin = () => {
     loginFromRef.value.validate((valid) => {
-      if (!valid) return;
-      loading.value = true;
+      if (!valid) return
+      loading.value = true
       store
         .dispatch('user/login', loginForm.value) // 调用模块方法
         .then((res) => {
-          loading.value = false;
-          router.push('/');
+          loading.value = false
+          router.push('/')
         })
         .catch((err) => {
-          console.log(err);
-          loading.value = false;
-        });
-    });
-  };
+          console.log(err)
+          loading.value = false
+        })
+    })
+  }
 </script>
 
 <style lang="scss" scoped>
@@ -135,14 +135,14 @@
       margin: 0 auto;
       overflow: hidden;
 
-      :v-deep .el-form-item {
+      ::v-deep .el-form-item {
         border: 1px solid rgba(255, 255, 255, 0.1);
         background: rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         color: #454545;
       }
 
-      :v-deep .el-input {
+      ::v-deep .el-input {
         display: inline-block;
         height: 47px;
         width: 85%;
